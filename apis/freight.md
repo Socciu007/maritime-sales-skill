@@ -6,13 +6,15 @@
 
 ## 入参
 
-| 参数 | 说明 | 是否必填 | 格式 |
+| 参数 | 说明 | 是否必填 | 格式/说明 |
 |------|------|---------|------|
 | start_port | 起运港 | 必填 | 港口英文名小写，如 `shanghai` |
 | end_port | 目的港 | 必填 | 港口英文名小写，如 `singapore` |
 | hhtime | 货好时间 | 选填 | `YYYY-MM-DD`，未提及传 `""` |
 | etd | 预计开船时间 | 选填 | `YYYY-MM-DD`，未提及传 `""` |
 | carrier | 船公司 | 选填 | 船公司英文名大写，如 `MAERSK`，未提及传 `""` |
+| userId | 用户ID | 选填 | 从 session 提取数字部分，如 session=`agent%3Amain%3A001` → `001` |
+
 
 > QQ 和 requireSailingSchedule 字段忽略不传
 

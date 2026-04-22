@@ -3,6 +3,9 @@
 ## 接口信息
 - **方法**：GET
 - **地址**：`https://www.dadaex.cn/api/interface/freight/getSchedule`
+- **超时设置**：
+  - 连接超时：120秒
+  - 总超时：120秒（或你希望的秒数）
 
 ## 入参
 

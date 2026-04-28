@@ -10,7 +10,7 @@
 |------|------|---------|---------|
 | carrier | 船公司 | 选填 | 船公司英文名大写，如 `COSCO` |
 | port | 目的港 | 必填 | 港口英文名小写，如 `singapore` |
-| userId | 用户ID | 必填 | 从 session 提取数字部分，如 session=`agent%3Amain%3A001` → `001` |
+| userId | 用户ID | 必填 | 调用 API 前，先执行 `session_status` 获取当前 Session key（如 `agent:main:975`），提取数字部分（如 `975`）作为 userId |
 | groupId | 组ID | 忽略 | 不传 |
 | routeCode | 航线代码 | 选填 | 如 `CME`，未知传 `""` |
 | route | 航线名称 | 选填 | 如 `东南亚线`，未知传 `""` |
@@ -52,7 +52,7 @@
 {
   "carrier": "COSCO",
   "port": "singapore",
-  "userId": "001",
+  "userId": "975",
   "routeCode": "CME",
   "route": "",
   "delayDate": "2026-04-17",

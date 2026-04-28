@@ -137,10 +137,14 @@
 
 ---
 
-### userId（舱位API专用）
-- 从系统 session 字符串中提取数字部分
-- 示例：session = `agent%3Amain%3A001` → userId = `001`
-- 示例：session = `agent%3Amain%3A123` → userId = `123`
+### userId（运价/舱位/订单API必填）
+- **每次调用 API 前，必须先执行 `session_status` 工具获取当前会话信息**
+- 从返回的 Session key 中提取数字部分作为 userId
+- 示例流程：
+  1. 执行 `session_status` → 获取 `Session: agent:main:975`
+  2. 提取数字部分 → `975`
+  3. 将 `975` 作为 userId 传入 API
+- **禁止**使用固定的示例值，必须动态获取当前会话的实际ID
 
 ---
 

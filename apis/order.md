@@ -17,7 +17,7 @@
 | start_time | 订单创建时间范围-开始 | 选填 | `YYYY-MM-DD`，不筛选传 `""` |
 | end_time | 订单创建时间范围-结束 | 选填 | `YYYY-MM-DD`，不筛选传 `""` |
 | etd_time | ETD时间筛选 | 选填 | `YYYY-MM-DD`，不筛选传 `""` |
-| userId | 用户ID | 必填 | 从session提取，同舱位API |
+| userId | 用户ID | 必填 | 调用 API 前，先执行 `session_status` 获取当前 Session key（如 `agent:main:975`），提取数字部分（如 `975`）作为 userId |
 | groupId | 组ID | 忽略 | 传 `""` |
 | idCindy | 固定参数 | 必填 | 固定传 `true` |
 | yp | 固定参数 | 必填 | 固定传 `0` |

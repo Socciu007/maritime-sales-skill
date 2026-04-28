@@ -13,7 +13,7 @@
 | hhtime | 货好时间 | 选填 | `YYYY-MM-DD`，未提及传 `""` |
 | etd | 预计开船时间 | 选填 | `YYYY-MM-DD`，未提及传 `""` |
 | carrier | 船公司 | 选填 | 船公司英文名大写，如 `MAERSK`，未提及传 `""` |
-| userId | 用户ID | 必填 | 从 session 提取数字部分，如 session=`agent%3Amain%3A975` → `975` |
+| userId | 用户ID | 必填 | 调用 API 前，先执行 `session_status` 获取当前 Session key（如 `agent:main:975`），提取数字部分（如 `975`）作为 userId |
 
 
 > QQ 和 requireSailingSchedule 字段忽略不传

@@ -12,11 +12,29 @@
 | end_port | 目的港 | 二选一 | 港口英文名大写，如 `SINGAPORE` |
 | carrier | 船公司 | **必填** | 船公司英文名大写，如 `MAERSK` |
 | routeLine | 航线名称 | 二选一 | 航线中文名，如 `东南亚线` |
+| containerType | 箱型 | 选填 | 箱型代码：`GP`、`HQ`、`FR`、`OT`、`RE` 等，未提及传 `""` |
 
 > ⚠️ **必填规则：**
 > - `carrier` 必填，缺少时必须追问
 > - `end_port` 和 `routeLine` 至少提供一个，都没有时必须追问
 > - 两个都有时优先用 `routeLine`
+
+### containerType 箱型枚举值
+
+| 代码 | 箱型说明 |
+|------|----------|
+| `GP` | 干货箱 (General Purpose) - 20GP/40GP |
+| `HQ` | 高箱 (High Cube) - 40HQ |
+| `FR` | 框架箱 (Flat Rack) |
+| `OT` | 开顶箱 (Open Top) |
+| `RE` | 冷藏箱 (Reefer) |
+| `OH` | 超高箱 (Over Height) |
+| `TK` | 罐式集装箱 (Tank) |
+| `HT` | 挂衣箱 (Hanger) |
+| `DG` | 危险品 (Dangerous Goods) |
+| `FQ` | 其他特种箱 |
+
+> 注：当查询特种箱（FR/OT/RE等）附加费时，必须传入 `containerType` 参数
 
 ## 出参
 
@@ -80,6 +98,17 @@
 | 40gpSell | 40GP 价格 |
 | 40hqSell | 40HQ 价格 |
 
+### 特种箱费用字段
+当传入 `containerType` 为特种箱（FR/OT/RE等）时，可能返回以下字段：
+
+| 字段 | 说明 |
+|------|------|
+| `specialContainerSell` | 特种箱附加费（币种和单位视具体费用而定） |
+| `overweightFee` | 超重附加费 |
+| `oversizeFee` | 超尺附加费 |
+
+> 注：特种箱附加费结构可能与普通箱不同，以API实际返回为准
+
 ### SEAWAY 特殊字段
 只有 `费用名称`、`费用英文名称`、`备注` 三个字段，单独一行展示。
 
@@ -95,3 +124,28 @@
 |---------|---------|
 | carrier | "请问您要查哪家船司的附加费？" |
 | end_port 和 routeLine 都没有 | "请问您要查哪个目的港或哪条航线的附加费？" |
+| 查特种箱缺containerType | "请问您要查什么箱型的附加费？（如FR框架箱、OT开顶箱等）" |
+
+## 调用示例
+
+### 普通箱附加费查询
+```json
+{
+  "carrier": "MAERSK",
+  "end_port": "SINGAPORE",
+  "start_port": "SHANGHAI",
+  "routeLine": "",
+  "containerType": ""
+}
+```
+
+### 特种箱附加费查询（以40FR为例）
+```json
+{
+  "carrier": "ONE",
+  "end_port": "LAEM CHABANG",
+  "start_port": "SHANGHAI",
+  "routeLine": "",
+  "containerType": "FR"
+}
+```

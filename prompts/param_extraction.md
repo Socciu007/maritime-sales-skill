@@ -15,6 +15,11 @@
   "hhtime": "",
   "routeCode": "",
   "route": "",
+  "destinationPortTerminal": "",
+  "departurePortTerminal": "",
+  "schedule": "",
+  "transitType": "",
+  "transitPort": "",
   "shipName": "",
   "voyage": "",
   "type": "",
@@ -83,6 +88,50 @@
 - 客户直接提及时提取（如"TP1"、"AEX"、"东南亚线"）
 - 未提及时传 `""`
 - 在复合查询中，可从运价API返回结果中补充这两个字段
+
+---
+
+### destinationPortTerminal（目的港码头）
+- 客户指定目的港码头时提取
+- 胡志明常用码头：`SPITC`、`CAT LAI`、`CAI MEP`
+- 曼谷常用码头：`PAT`、`TCT`、`UNITHAI`
+- 未提及时传 `""`
+
+---
+
+### departurePortTerminal（起运港码头）
+- 客户指定上海起运码头时提取
+- 上海常用码头：`WGQ4(外四)`、`WGQ1(外一)`、`WGQ5(外五)`、`WGQ2(外二)`
+- 未提及时传 `""`
+
+---
+
+### schedule（船期）
+- 客户指定星期几时提取
+- 转换规则：
+  - "周日"、"星期天" → `0`
+  - "周一"、"星期一" → `1`
+  - "周二"、"星期二" → `2`
+  - "周三"、"星期三" → `3`
+  - "周四"、"星期四" → `4`
+  - "周五"、"星期五" → `5`
+  - "周六"、"星期六" → `6`
+- 未提及时传 `""`
+
+---
+
+### transitType（中转类型）
+- 客户说"直达"、"直航"、"DIRECT" → `DIRECT`
+- 客户说"中转"、"TRANSIT" → `TRANSIT`
+- 未提及时传 `""`
+
+---
+
+### transitPort（中转港）
+- 客户指定中转港口时提取
+- 将中文港口名转换为英文名（小写）
+- 示例："新加坡中转" → `singapore`
+- 未提及时传 `""`
 
 ---
 

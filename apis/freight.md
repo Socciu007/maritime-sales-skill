@@ -13,10 +13,46 @@
 | hhtime | 货好时间 | 选填 | `YYYY-MM-DD`，未提及传 `""` |
 | etd | 预计开船时间 | 选填 | `YYYY-MM-DD`，未提及传 `""` |
 | carrier | 船公司 | 选填 | 船公司英文名大写，如 `MAERSK`，未提及传 `""` |
+| routeCode | 航线代码 | 选填 | 如 `KCS`、`SAOLA`，未提及传 `""` |
+| destinationPortTerminal | 目的港码头 | 选填 | 如 `SPITC`、`CAT LAI`，未提及传 `""` |
+| departurePortTerminal | 起运港码头 | 选填 | 如 `WGQ4`、`外四`，未提及传 `""` |
+| schedule | 船期 | 选填 | `0-6` 代表周日到周六，未提及传 `""` |
+| transitType | 中转类型 | 选填 | `DIRECT`/`直达` 或 `TRANSIT`/`中转`，未提及传 `""` |
+| transitPort | 中转港 | 选填 | 港口英文名，如 `singapore`，未提及传 `""` |
 | userId | 用户ID | 必填 | 调用 API 前，先执行 `session_status` 获取当前 Session key（如 `agent:main:975`），提取数字部分（如 `975`）作为 userId |
 
 
 > QQ 和 requireSailingSchedule 字段忽略不传
+
+### 参数详细说明
+
+#### routeCode（航线代码）
+- 用于精确筛选特定航线
+- 示例：`KCS`、`SAOLA`、`CVT`、`CV2`
+- 可从运价返回结果中的 `航线代码` 字段获取复用
+
+#### destinationPortTerminal（目的港码头）
+- 指定目的港的具体码头
+- 胡志明常用码头：`SPITC`、`CAT LAI`、`CAI MEP`
+- 曼谷常用码头：`PAT`、`TCT`
+
+#### departurePortTerminal（起运港码头）
+- 指定上海起运的具体码头
+- 示例：`WGQ4(外四)`、`WGQ1(外一)`、`WGQ5(外五)`
+
+#### schedule（船期）
+- 按星期几筛选船期
+- 数值对应：`0=周日`、`1=周一`、`2=周二`、`3=周三`、`4=周四`、`5=周五`、`6=周六`
+
+#### transitType（中转类型）
+- `DIRECT` 或 `直达` = 只查直达船
+- `TRANSIT` 或 `中转` = 只查中转船
+- 不传则返回所有类型
+
+#### transitPort（中转港）
+- 指定中转港口
+- 示例：`singapore`、`hong kong`、`busan`
+- 配合 `transitType=TRANSIT` 使用
 
 ## 出参结构总览
 
@@ -143,6 +179,7 @@
 
 ## 调用示例
 
+### 基础查询
 ```json
 {
   "start_port": "shanghai",
@@ -150,6 +187,39 @@
   "hhtime": "",
   "etd": "2026-04-20",
   "carrier": "MAERSK",
+  "userId": "975"
+}
+```
+
+### 指定目的港码头查询
+```json
+{
+  "start_port": "shanghai",
+  "end_port": "ho chi minh",
+  "carrier": "MSC",
+  "destinationPortTerminal": "SPITC",
+  "userId": "975"
+}
+```
+
+### 指定航线代码和中转类型
+```json
+{
+  "start_port": "shanghai",
+  "end_port": "bangkok",
+  "routeCode": "CVT",
+  "transitType": "DIRECT",
+  "userId": "975"
+}
+```
+
+### 指定船期（周五开船）
+```json
+{
+  "start_port": "shanghai",
+  "end_port": "singapore",
+  "schedule": 5,
+  "carrier": "ONE",
   "userId": "975"
 }
 ```

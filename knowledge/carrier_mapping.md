@@ -8,7 +8,7 @@
 | 中远 / COSCO | COSCO |
 | 长荣 / Evergreen | EVERGREEN |
 | 万海 / Wan Hai | WAN HAI |
-| 太荣 / KMTC | KMTC |
+| 高丽海运 / KMTC | KMTC |
 | 地中海 / MSC | MSC |
 | 达飞 / CMA | CMA CGM |
 | 赫伯罗特 / Hapag | HAPAG-LLOYD |
@@ -22,7 +22,7 @@
 | 川崎汽船 / K-Line | K LINE |
 | 以星 / Zim | ZIM |
 | 安通 | ANTONG |
-| 中谷 | SINOKOR |
+| 中谷 / ZHONGGU | ZHONGGU |
 | 南星 | NAMSUNG |
 | 高丽海运 | KOREA MARINE TRANSPORT |
 | 海丰 / SITC | SITC |

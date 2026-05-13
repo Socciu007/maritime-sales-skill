@@ -57,6 +57,7 @@
 | 中文名 | 英文名 |
 |--------|--------|
 | 孟买 | mumbai |
+| 那瓦舍瓦 / NSA | nhava sheva |
 | 科钦 | cochin |
 | 钦奈 | chennai |
 | 加尔各答 | kolkata |

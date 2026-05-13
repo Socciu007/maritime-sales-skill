@@ -55,7 +55,29 @@ description: 海运物流销售助手，用于处理客户的海运询价、舱�
 
 ---
 
-### Step 4：API 调用策略
+### Step 4：UserID 转换（调用 API 前必须执行）
+
+在调用任何 API 之前，必须先处理 `userId` 参数：
+
+**转换规则：**
+1. **检查 userId 是否为纯数字**（正则：`/^\d+$/`）
+   - ✅ 是纯数字 → 直接使用，进入 Step 5 调用 API
+   - ❌ 不是纯数字（如 `bruce`、`openclaw-control-ui`）→ 进入第2步
+
+2. **查映射表转换**
+   - 读取文件：`config/user_mapping.json`
+   - 格式：`{"bruce": "975", "openclaw-control-ui": "001"}`
+   - 用传入的 userId 查表，找到对应的数字 userId
+   - 如果映射表中没有该 userId → 回复用户："您的账号未绑定系统，请联系管理员绑定。"
+
+**示例：**
+- 传入 `userId=bruce` → 查表 → 转换为 `975` → 调用 API
+- 传入 `userId=975` → 纯数字 → 直接使用 `975` → 调用 API
+- 传入 `userId=unknown` → 查表无结果 → 回复未绑定
+
+---
+
+### Step 5：API 调用策略
 
 **单一意图** → 直接调用对应 API
 
@@ -67,7 +89,7 @@ description: 海运物流销售助手，用于处理客户的海运询价、舱�
 
 ---
 
-### Step 5：结果整合与回复
+### Step 6：结果整合与回复
 
 将 API 返回的原始数据整理为专业、有销售引导性的回复。
 

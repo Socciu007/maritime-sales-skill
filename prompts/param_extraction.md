@@ -24,6 +24,7 @@
   "voyage": "",
   "type": "",
   "portType": "",
+  "containerType": "",
   "order_blNo": [],
   "order_portname": "",
   "order_carrier": "",
@@ -157,6 +158,16 @@
 
 ---
 
+### containerType（箱型）
+用于附加费查询，区分特种箱和普通箱：
+- 客户说"普通箱"、"20GP"、"40HQ" → `GP` 或 `HQ`
+- 客户说"框架箱"、"FR" → `FR`
+- 客户说"开顶箱"、"OT" → `OT`
+- 客户说"冷藏箱"、"RE" → `RE`
+- 未提及特种箱 → `""`
+
+---
+
 ### 订单 API 专用参数
 
 #### order_blNo（单号数组）
@@ -188,11 +199,14 @@
 
 ### userId（运价/舱位/订单API必填）
 - **每次调用 API 前，必须先执行 `session_status` 工具获取当前会话信息**
-- 从返回的 Session key 中提取数字部分作为 userId
+- 从返回的 Session key 中取最后一个冒号后面的值作为 userId
 - 示例流程：
-  1. 执行 `session_status` → 获取 `Session: agent:main:975`
-  2. 提取数字部分 → `975`
-  3. 将 `975` 作为 userId 传入 API
+  1. 执行 `session_status` → 获取 `Session: agent:main:975` 或 `Session: agent:main:wecom:direct:bruce`
+  2. 取最后一个冒号后面的值 → `975` 或 `bruce`
+  3. 判断：
+     - 纯数字（如 `975`）→ 直接作为 userId 传入 API
+     - 字符串（如 `bruce`）→ 查 `config/user_mapping.json` 转换为数字 `975` 后传入 API
+     - 映射表中无此用户 → 回复"您的账号未绑定系统，请联系管理员绑定"
 - **禁止**使用固定的示例值，必须动态获取当前会话的实际ID
 
 ---

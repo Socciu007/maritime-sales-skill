@@ -15,8 +15,10 @@
 
 **调用 API：**
 ```
-GET .../chatOrder?blNo=["FYEB088797-120160"]&userId=001&idCindy=true&yp=0
+GET .../chatOrder?blNo=["FYEB088797-120160"]&userId={{userId}}&idCindy=true&yp=0
 ```
+
+> userId 取值方式：调用 session_status 获取 Session key（如 `agent:main:975` 或 `agent:main:wecom:direct:bruce`），取最后一个冒号后面的值。若为纯数字（如 `975`）直接使用，若为字符串（如 `bruce`）需查 `config/user_mapping.json` 转换为数字。若映射表中无此用户，回复"您的账号未绑定系统，请联系管理员绑定"。
 
 **期望回复：**
 

@@ -22,7 +22,7 @@
 }
 ```
 
-**userId：** 从 session 提取，如 `001`
+**userId：** 从 session 提取，如 `{{userId}}`。调用 session_status 获取 Session key，取最后一个冒号后面的值。若为纯数字直接使用，若为字符串需查 `config/user_mapping.json` 转换为数字。
 
 **调用 API：** 舱位API（carrier 为空也可调用）
 

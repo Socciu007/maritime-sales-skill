@@ -19,7 +19,7 @@
 | schedule | 船期 | 选填 | `0-6` 代表周日到周六，未提及传 `""` |
 | transitType | 中转类型 | 选填 | `DIRECT`/`直达` 或 `TRANSIT`/`中转`，未提及传 `""` |
 | transitPort | 中转港 | 选填 | 港口英文名，如 `singapore`，未提及传 `""` |
-| userId | 用户ID | 必填 | 调用 API 前，先执行 `session_status` 获取当前 Session key（如 `agent:main:975`），提取数字部分（如 `975`）作为 userId |
+| userId | 用户ID | 必填 | 调用 API 前，先执行 `session_status` 获取当前 Session key（如 `agent:main:975` 或 `agent:main:wecom:direct:bruce`），取最后一个冒号后面的值。若为纯数字（如 `975`）直接使用，若为字符串（如 `bruce`）需查 `config/user_mapping.json` 转换为数字。若映射表中无此用户，回复"您的账号未绑定系统，请联系管理员绑定"。 |
 
 
 > QQ 和 requireSailingSchedule 字段忽略不传
@@ -187,7 +187,7 @@
   "hhtime": "",
   "etd": "2026-04-20",
   "carrier": "MAERSK",
-  "userId": "975"
+  "userId": "{{userId}}"
 }
 ```
 
@@ -198,7 +198,7 @@
   "end_port": "ho chi minh",
   "carrier": "MSC",
   "destinationPortTerminal": "SPITC",
-  "userId": "975"
+  "userId": "{{userId}}"
 }
 ```
 
@@ -209,7 +209,7 @@
   "end_port": "bangkok",
   "routeCode": "CVT",
   "transitType": "DIRECT",
-  "userId": "975"
+  "userId": "{{userId}}"
 }
 ```
 
@@ -220,7 +220,7 @@
   "end_port": "singapore",
   "schedule": 5,
   "carrier": "ONE",
-  "userId": "975"
+  "userId": "{{userId}}"
 }
 ```
 

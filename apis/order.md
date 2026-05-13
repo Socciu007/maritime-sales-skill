@@ -17,7 +17,7 @@
 | start_time | 订单创建时间范围-开始 | 选填 | `YYYY-MM-DD`，不筛选传 `""` |
 | end_time | 订单创建时间范围-结束 | 选填 | `YYYY-MM-DD`，不筛选传 `""` |
 | etd_time | ETD时间筛选 | 选填 | `YYYY-MM-DD`，不筛选传 `""` |
-| userId | 用户ID | 必填 | 调用 API 前，先执行 `session_status` 获取当前 Session key（如 `agent:main:975`），提取数字部分（如 `975`）作为 userId |
+| userId | 用户ID | 必填 | 调用 API 前，先执行 `session_status` 获取当前 Session key（如 `agent:main:975` 或 `agent:main:wecom:direct:bruce`），取最后一个冒号后面的值。若为纯数字（如 `975`）直接使用，若为字符串（如 `bruce`）需查 `config/user_mapping.json` 转换为数字。若映射表中无此用户，回复"您的账号未绑定系统，请联系管理员绑定"。 |
 | groupId | 组ID | 忽略 | 传 `""` |
 | idCindy | 固定参数 | 必填 | 固定传 `true` |
 | yp | 固定参数 | 必填 | 固定传 `0` |
@@ -51,16 +51,16 @@ API 调用后必须先检查返回的 `status` 字段，再决定如何回复，
 
 ```
 # 按EB号查询
-GET .../chatOrder?blNo=["FYEB088797-120160"]&userId=001&groupId=&idCindy=true&yp=0
+GET .../chatOrder?blNo=["FYEB088797-120160"]&userId={{userId}}&groupId=&idCindy=true&yp=0
 
 # 按提单号查询
-GET .../chatOrder?blNo=["ONEYSHAG72304600"]&userId=001&groupId=&idCindy=true&yp=0
+GET .../chatOrder?blNo=["ONEYSHAG72304600"]&userId={{userId}}&groupId=&idCindy=true&yp=0
 
 # 按目的港查询
-GET .../chatOrder?blNo=&portname=SINGAPORE&userId=001&groupId=&idCindy=true&yp=0&start_time=&end_time=&etd_time=&carrier=&line_code=&vessel=&voyage=
+GET .../chatOrder?blNo=&portname=SINGAPORE&userId={{userId}}&groupId=&idCindy=true&yp=0&start_time=&end_time=&etd_time=&carrier=&line_code=&vessel=&voyage=
 
 # 按船名+航次查询
-GET .../chatOrder?blNo=&vessel=CALLAO BRIDGE&voyage=0291S&userId=001&groupId=&idCindy=true&yp=0
+GET .../chatOrder?blNo=&vessel=CALLAO BRIDGE&voyage=0291S&userId={{userId}}&groupId=&idCindy=true&yp=0
 ```
 
 ## 出参字段分类

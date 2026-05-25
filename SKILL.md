@@ -146,3 +146,26 @@ description: 海运物流销售助手，用于处理客户的海运询价、舱�
 - 订单查询：出参字段的 key 本身就是自然语言问句，直接做语义匹配取对应 value 回答，不要把所有字段全部倒出来
 - 订单查询：不传任何筛选条件不可调用，必须先引导客户提供单号或筛选条件
 - 订单查询：进港时间、VGM重量等字段可能是数组（每个箱号一条），需逐条展示
+
+## 静态知识查询（不触发API）
+
+当用户询问以下类型问题时，直接读取对应知识文件，不调用API：
+
+| 问题类型 | 知识文件 |
+|---------|----------|
+| 船公司特点/航线分析 | knowledge/carrier_analysis.md |
+| 公司介绍/优势/发展史 | knowledge/company_introduction.md |
+| 集装箱操作/箱型/进港规则 | knowledge/container_guide.md |
+| 电子合同签署流程 | knowledge/contract_flow.md |
+| 客服培训/报价技巧/话术 | knowledge/customer_service_training.md |
+| 危险品分类/化工品要求 | knowledge/dangerous_goods.md |
+| 组织架构/人员联络 | knowledge/org_chart.md |
+| 销售流程/订舱流程/操作规范 | knowledge/sales_operation_flow.md |
+| 销售Q&A/开场白/话术 | knowledge/sales_qa.md |
+| 常用网址/官网 | knowledge/websites.md |
+| 工作对接/放单/截单流程 | knowledge/work_coordination.md |
+
+**注意：**
+- 上述问题不触发API调用
+- API能回答的问题（运价/舱位/船期/订单/freetime/附加费/费用等）必须走API路径，不受此规则影响
+- carrier_mapping.md、port_mapping.md 是API参数映射文件，不属于静态知识，不通过此规则读取
